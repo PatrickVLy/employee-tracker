@@ -15,3 +15,12 @@ salary INTEGER (30) NULL,
 department_id INTEGER NULL,
 PRIMARY KEY (id) 
 );
+
+CREATE TABLE employee(
+id INTEGER NOT NULL,
+first_name VARCHAR(30) NULL,
+last_name VARCHAR (30) NULL,
+role_id INTEGER NULL,
+manager_id INTEGER NULL,
+PRIMARY KEY (id) 
+);
