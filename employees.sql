@@ -8,3 +8,10 @@ name VARCHAR(30) NULL,
 PRIMARY KEY (id)
 );
 
+CREATE TABLE role(
+id INTEGER NOT NULL,
+title VARCHAR(30) NULL,
+salary INTEGER (30) NULL,
+department_id INTEGER NULL,
+PRIMARY KEY (id) 
+);
