@@ -41,7 +41,7 @@ const connection = mysql.createConnection({
                 break;
       
               case 'View Departments':
-                viewDepartments();
+                viewDepartment();
                 break;
       
               case 'View Roles':
@@ -73,20 +73,31 @@ function viewDepartment() {
       }
 
 function addDepartment(){
-    console.log('adding new department...\n');
-    const query = connection.query(
-      'INSERT INTO department SET ?',
-      {
-        name: ''
-      },
-      (err, res) => {
-        if (err) throw err;
-        viewDepartment();
-      }
-    );
-    console.log(query.sql);
+    inquirer
+    .prompt({
+      name: 'newdepartment',
+      type: 'input',
+      message: 'What department would you like to add?',
+    })
+    .then((answer) => {
+        console.log('adding new department...\n');
+        const query = connection.query(
+          'INSERT INTO department SET ?',
+          {
+            name: answer.newdepartment
+          },
+          (err, res) => {
+            if (err) throw err;
+            console.log(`${res.affectedRows} Department Added!\n`);
+            viewDepartment();
+          }
+        );
+        console.log(query.sql);
+      
+    });
 };
-  
+
+
   connection.connect((err) => {
     if (err) throw err;
     mainMenu();
