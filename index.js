@@ -98,6 +98,67 @@ function addDepartment(){
 };
 
 
+function viewRoles() {
+    connection.query(`SELECT * FROM employees_db.roles`, function(err, res) {
+            if (err) throw err;
+            console.table(res);
+            mainMenu();
+        });
+      }
+
+
+function addRole(){
+    connection.query(`SELECT * FROM employees_db.roles`, function(err, res) {
+        if (err) throw err;
+        const rolesArray = res.map(function(roles){
+            return roles.title
+        })
+        console.table(res);
+
+
+        inquirer
+        .prompt({
+          name: 'newrole',
+          type: 'input',
+          message: 'What role would you like to add?',
+        },
+        {
+            name: 'salary',
+            type: 'input',
+            message: 'what is the salary for this role?',
+          },
+          {
+            name: 'department',
+            type: 'list',
+            message: 'what department is this role in?',
+            choices: rolesArray
+          }
+        
+        
+        )
+        .then((answer) => {
+            console.log('adding new department...\n');
+            const query = connection.query(
+              'INSERT INTO department SET ?',
+              {
+                name: answer.newdepartment
+              },
+              (err, res) => {
+                if (err) throw err;
+                console.log(`${res.affectedRows} Department Added!\n`);
+                viewDepartment();
+              }
+            );
+            console.log(query.sql);
+          
+        });
+        mainMenu();
+    });
+
+    
+    };
+    
+
   connection.connect((err) => {
     if (err) throw err;
     mainMenu();
