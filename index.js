@@ -6,9 +6,10 @@ const connection = mysql.createConnection({
     port: 3306,
     user: 'root',
     password: 'password',
-    database: '',
+    database: 'employees_db',
   });
   
+  //function to run when 
   function mainMenu(){
         inquirer
           .prompt({
@@ -62,6 +63,29 @@ const connection = mysql.createConnection({
             }
           });
       };
+
+function viewDepartment() {
+    connection.query(`SELECT * FROM employees_db.department`, function(err, res) {
+            if (err) throw err;
+            console.table(res);
+            mainMenu();
+        });
+      }
+
+function addDepartment(){
+    console.log('adding new department...\n');
+    const query = connection.query(
+      'INSERT INTO department SET ?',
+      {
+        name: ''
+      },
+      (err, res) => {
+        if (err) throw err;
+        viewDepartment();
+      }
+    );
+    console.log(query.sql);
+};
   
   connection.connect((err) => {
     if (err) throw err;
