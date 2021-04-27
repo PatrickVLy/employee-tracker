@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS employees_db;
-CREATE DATABASE employeess_db;
+CREATE DATABASE employees_db;
 USE employees_db;
 
 CREATE TABLE department(
@@ -8,7 +8,7 @@ name VARCHAR(30) NULL,
 PRIMARY KEY (id)
 );
 
-CREATE TABLE role(
+CREATE TABLE roles(
 id INTEGER AUTO_INCREMENT NOT NULL,
 title VARCHAR(30) NULL,
 salary INTEGER (30) NULL,
@@ -28,22 +28,23 @@ PRIMARY KEY (id)
 INSERT INTO department (name)
 VALUES ("Sales"), ("Finance"), ("Engineering"), ("Legal");
 
-INSERT INTO role (title, salary, department_id)
-VALUES ("Marketing Manager", 120000, sales), 
-("Front End Developer", 120000, Engineering), 
-("Underwriter", 120000, Legal), 
-("Accountant", 120000, Finance),
-("Account Exectutive", 120000, sales), 
-("Software Engineer", 120000, Engineering), 
-("Attorney", 120000, Legal), 
-("Book Keeper", 120000, Finance);
+INSERT INTO roles (title, salary, department_id)
+VALUES ("Marketing Manager", 120000, 1), 
+("Front End Developer", 120000, 3), 
+("Underwriter", 120000, 4), 
+("Accountant", 120000, 2),
+("Account Exectutive", 120000, 1), 
+("Software Engineer", 120000, 3), 
+("Attorney", 120000, 4), 
+("Book Keeper", 120000, 2);
 
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ("Patrick", "Ly", "Software Engineer"),
-("Pierre", "Bourbonais", "Marketing Manager"),
-("Nancy", "Murphy", "Accountant"),
-("Matia", "Marks", "Underwriter"),
-("Lauren", "Friedman", "Account Executive"),
-("Jacqueline", "Nguyen", "Front End Developer"),
-("Mark", "Fiore", "Attorney"),
-("Teresa", "Knight", "Book Keeper");
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES 
+("Patrick", "Ly",6, NULL),
+("Pierre", "Bourbonais", 1, NULL),
+("Nancy", "Murphy", 4, NULL),
+("Matia", "Marks", 3, NULL),
+("Lauren", "Friedman", 5, NULL),
+("Jacqueline", "Nguyen", 2, NULL),
+("Mark", "Fiore", 7, NULL),
+("Teresa", "Knight", 8, NULL);
