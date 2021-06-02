@@ -312,7 +312,7 @@ const connection = mysql.createConnection({
       }));
   
       console.table(res);
-      console.log("roleArray to Update!\n")
+      console.log("Updated!\n")
   
       promptEmployeeRole(employeeChoices, roleChoices);
     });
